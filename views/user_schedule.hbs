@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+        crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>
+    <title>Schedule</title>
+    <style>
+        a:hover {
+            background-color: rgb(139, 228, 220);
+        }
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        body {
+        background-color:honeydew;
+        }
+        table{
+            border:solid 0.3px ;
+            color: black;
+        }
+        
+    </style>
+
+</head>
+
+<body>
+    <!--  navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color: #83D0C9;">
+        <h5>Glove Weight Spot Check</h5>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+
+    <!--///////////////////////////////booooooooooooooooooooooooodyyyyyyyyyyyyyyyyyyyyy ///////////// -->
+    <div class="container">
+        <div class="row my-3  d-flex justify-content-center">
+            <h4>Schedule</h4>
+        </div>
+        <div class="row my-3">
+            <div class="col-8">
+                <p class="form-control" id="demo1" style="font-size:15px;"></p>
+            </div>
+        </div>
+        <div class="row my-1">
+            <div class="col pt-1 table-responsive">
+                <table class="table table-bordered  text-center" id="stafftable" style="background-color: white;font-size:12px;">
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+
+    var now = moment().format('dddd , Do MMM YYYY')
+    // console.log(now)
+    document.getElementById("demo1").innerHTML = now
+
+
+    var data = "{{user}}"
+    var de_data = JSON.parse(decodeURI(data))
+    var user_schedule = []
+    var block = [];
+    var table_staff = "<thead><tr><th scope='col'>ID.</th><th scope='col'>Name Surname</th><th scope='col'>Department</th><th scope='col'>Status</th></tr></thead><tbody>";
+
+    //console.log(de_data)
+
+    for (let i = 0; i < de_data.block.length; i++) {
+        block.push(de_data.block[i])
+        console.log(block[i])
+    }
+    for (let i = 0; i < de_data.staffschedule.length; i++) {
+        user_schedule.push(de_data.staffschedule[i])
+        console.log(user_schedule[i])
+    }
+
+    for (let i=0;i<user_schedule.length;i++) {
+            if(user_schedule[i].c_status == "checked"){
+                 table_staff += "<tr><td>" + user_schedule[i].c_badgeNo + "</td><td>" + user_schedule[i].c_name + " " + user_schedule[i].c_surname + "</td><td>" + user_schedule[i].c_department + " , " + user_schedule[i].c_position + "</td><td>"+user_schedule[i].c_status+"</td></tr>"
+            }else{
+                 table_staff += "<tr><td><a href='/userlogin'>" + user_schedule[i].c_badgeNo + "</td><td>" + user_schedule[i].c_name + " " + user_schedule[i].c_surname + "</td><td>" + user_schedule[i].c_department + " , " + user_schedule[i].c_position + "</td><td>"+user_schedule[i].c_status+"</td></tr>"
+     
+            }
+        }
+    {{!-- for (let i=0;i<user_schedule.length;i++) {
+             table_staff += "<tr><td><a href='/userlogin'>" + user_schedule[i].c_badgeNo + "</td><td>" + user_schedule[i].c_name + " " + user_schedule[i].c_surname + "</td><td>" + user_schedule[i].c_department + " , " + user_schedule[i].c_position + "</td><td>"+user_schedule[i].c_status+"</td></tr>"
+        } --}}
+
+    table_staff += "</tbody></table>"
+    document.getElementById("stafftable").innerHTML = table_staff
+
+    
+
+
+
+</script>
+
+</html>

@@ -1,0 +1,93 @@
+const mongoose = require('mongoose')
+var Schema = mongoose.Schema
+
+// =============== Alert ===============
+var AlertSchema = new Schema({
+    a_time:{
+        type:String,
+        required:true
+    },
+    a_day:{
+        type:String,
+        required:true
+    },
+    a_date:{
+        type:String,
+        required:true
+    },
+    a_month:{
+        type:String,
+        required:true
+    },
+    a_year:{
+        type:String,
+        required:true
+    },
+    a_badgeNo:{
+        type:String,
+        required:true
+    },
+    a_name:{
+        type:String,
+        required:true
+    },
+    a_surname:{
+        type:String,
+        required:true
+    },
+    a_dept:{
+        type:String,
+        required:true
+    },
+    a_block:{
+        type:String,
+        required:true
+    },
+    a_productline:{
+        type:String,
+        required:true
+    },
+    a_productID:{
+        type:String,
+        required:true
+    },
+    a_productName:{
+        type:String,
+        required:true
+    },
+    a_productType:{
+        type:String,
+        required:true
+    },
+    a_stdlength_min:{
+        type:String,
+        required:true
+    },
+    a_stdlength_max:{
+        type:String,
+        required:true
+    },
+    a_stdweight_min:{
+        type:String,
+        required:true
+    },
+    a_stdweight_max:{
+        type:String,
+        required:true
+    },
+    a_length:{
+        type:String,
+        required:true
+    },
+    a_weight:{
+        type:String,
+        required:true
+    },
+    a_linespeed:{
+        type:String,
+        required:true
+    }
+})
+
+var Alert = mongoose.model('Alert',AlertSchema)
+module.exports = Alert

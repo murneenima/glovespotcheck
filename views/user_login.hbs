@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>
+
+    <!--/////////////////////////jQuery Library//////////////////////////////////-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <title>Login</title>
+    <style>
+        a:hover {
+            background-color: rgb(139, 228, 220);
+        }
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        body {
+        background-color:honeydew;
+        }
+        table{
+            border:solid 0.3px ;
+            color: black;
+        }
+        input{
+            border: none;
+             border-radius: 100px;
+        }
+        
+    </style>
+
+</head>
+
+<body>
+    <!--  navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color: #83D0C9;">
+        <h5>Glove Weight Spot Check</h5>
+
+    </nav>
+
+    <!--///////////////////////////////booooooooooooooooooooooooodyyyyyyyyyyyyyyyyyyyyy ///////////// -->
+    <div class="container">
+        <div class="row my-3  d-flex justify-content-center">
+            <h4>Login</h4>
+        </div>
+
+        <div class="container">
+            <form name="myForm" action="https://localhost:3000/check_login" method="POST" onsubmit="return check_form()">
+                <div class="row py-2">
+                    <div class="col-4">
+                        <label>Badge ID</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="text" class="input-font py-4 form-control" name="badgeNo1" id="badgeNO1" placeholder="Badge NO">
+                    </div>
+                </div>
+
+                <div class="row py-2">
+                    <div class="col-4">
+                        <label>Password</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="password" class="input-font py-4 form-control" name="password" id="password" 
+                            placeholder="Password">
+                    </div>
+                </div>
+
+                <div class="row py-2 ">
+                    <button type="submit" id="login" class="btn btn-info center" onclick="checkCookie()" >Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+// check login and password
+
+
+
+function check_form(){
+    var x = document.forms["myForm"]["badgeNo1"].value;
+    if (x == "") {
+    alert("Badge ID must be filled out");
+    return false;
+  }
+}
+
+{{!-- function setCookie(cname,cvalue,exdays) {
+  var d = new Date();
+ // console.log("1."+d)
+  var time_get = parseInt(d.getTime())
+  var time_expire = parseInt(exdays*60*1000);
+  d.setTime(time_get+time_expire);
+  var expires = "expires=" + d.toGMTString();
+  //console.log("2."+d)
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function checkCookie() {
+  var user=getCookie("username");
+  if (user != "") {
+    alert("Welcome again " + user);
+  } else {
+     user = document.getElementById("badgeNO1").value
+
+     if (user != "" && user != null) {
+        alert("Welcome " + user);
+        setCookie("username", user, 1);
+     }
+  }
+} --}}
+
+
+</script>
+
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans" rel="stylesheet">
+    <script>
+        if (JSON && JSON.stringify && JSON.parse) var Session = Session || (function() {
+         
+         // window object
+         var win = window.top || window;
+         
+         // session store
+         var store = (win.name ? JSON.parse(win.name) : {});
+         
+         // save store on page unload
+         function Save() {
+           win.name = JSON.stringify(store);
+         };
+         
+         // page unload event
+         if (window.addEventListener) window.addEventListener("unload", Save, false);
+         else if (window.attachEvent) window.attachEvent("onunload", Save);
+         else window.onunload = Save;
+        
+         // public methods
+         return {
+         
+           // set a session variable
+           set: function(name, value) {
+             store[name] = value;
+           },
+           
+           // get a session value
+           get: function(name) {
+             return (store[name] ? store[name] : undefined);
+           },
+           
+           // clear session
+           clear: function() { store = {}; },
+           
+           // dump session data
+           dump: function() { return JSON.stringify(store); }
+        
+         };
+        
+        })();
+        </script>
+    <title> Add Staff</title>
+    <style>
+        body {
+            background-color: snow;
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- /////////////////////////////////// Navbar ///////////////////////////////////////////////////////////-->
+    <nav class="navbar navbar-dark bg-info fixed-top flex-md-nowrap p-0">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Glove Weight Spot Check</a>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                    <button id="logout" class="btn btn-info" name="logout" type="button" onclick="javascript:exit()" value="logout">Logout</button>
+                
+            </li>
+        </ul>
+    </nav>
+
+    <!-- //////////////////////////////////// Body ////////////////////////////////////////////////////// -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-2 mt-4">
+                <nav class="d-none d-sm-block bg-light fixed-left sidebar">
+                    <div class="sidebar-sticky">
+
+                        <!-- ================================== Schedule ============================================= -->
+                        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                            <span>Schedule</span>
+                            <a class="d-flex align-items-center text-muted">
+                                <i class="fas fa-angle-down"></i>
+                            </a>
+                        </h6>
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://localhost:3000/dailyschedule">
+                                    <i class="fas fa-calendar-check"></i> Daily Schedule
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="https://localhost:3000/weeklyschedule">
+                                    <i class="fas fa-calendar-alt"></i> Weekly Schedule
+                                </a>
+                            </li>
+                        </ul>
+
+                        <!-- ================================== Staff ============================================= -->
+                        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                            <span>Staff</span>
+                            <a class="d-flex align-items-center text-muted">
+                                <i class="fas fa-angle-down"></i>
+                            </a>
+                        </h6>
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://localhost:3000/staff">
+                                    <i class="fas fa-user"></i> Add Staff
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://localhost:3000/send_data">
+                                    <i class="fas fa-user-cog"></i> Manage Staff Data
+                                </a>
+                            </li>
+                             <li class="nav-item">
+                                <a class="nav-link" href="https://localhost:3000/send_staff">
+                                    <i class="fas fa-address-book"></i> Add Staff Schedule
+                                </a>
+                            </li>
+                             <li class="nav-item">
+                                <a class="nav-link" href="https://localhost:3000/manageschedule">
+                                    <i class="fas fa-calendar-alt"></i> Manage Staff Schedule
+                                </a>
+                            </li>
+                        </ul>
+
+                        <!-- ================================== Product ============================================= -->
+                        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                            <span>Product</span>
+                            <a class="d-flex align-items-center text-muted">
+                                <i class="fas fa-angle-down"></i>
+                            </a>
+                        </h6>
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://localhost:3000/admin_addValue.html">
+                                    <i class="fas fa-plus-circle"></i> Add Value
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://localhost:3000/sendblock">
+                                    <i class="fas fa-table"></i> Add Block
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="fas fa-allergies"></i> Add Product
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://localhost:3000/send_product">
+                                    <i class="fas fa-hands"></i> All Product
+                                </a>
+                            </li>
+                        </ul>
+
+                        <!-- ====================================== Report ============================================ -->
+                        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                            <span>Reports</span>
+                            <a class="d-flex align-items-center text-muted">
+                                <i class="fas fa-angle-down"></i>
+                            </a>
+                        </h6>
+                        <ul class="nav flex-column mb-2">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://localhost:3000/chart">
+                                    <i class="far fa-chart-bar"></i> Glove Weight Report
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://localhost:3000/report">
+                                    <i class="fas fa-clipboard-list"></i> Export Report
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="col-10 mt-5">
+                    <div class="container">
+                            <div class="row m-3">
+                                <h1>Add Staff</h1>
+                            </div>
+                            <form action="https://localhost:3000/addstaff" method="POST">
+                                <div class="row m-3">
+                                    <div class="col-md-3 ">
+                                        <label for="exampleFormControlSelect1">BADGE NO :</label>
+                                    </div>
+                                    <div class="col-md-3 ">
+                                        <input type="text" class="form-control" id="badgeNo" name="badgeNo"
+                                            placeholder="Badge No.">
+                                    </div>
+                                </div>
+                                
+                                <div class="row m-3">
+                                    <div class="col-md-3 ">
+                                        <label for="exampleFormControlSelect1">PASSWORD :</label>
+                                    </div>
+                                    <div class="col-md-3 ">
+                                        <input type="password" class="form-control" id="emp_password" name="emp_password"
+                                            placeholder="Password">
+                                    </div>
+                                </div>
+                               
+                                <div class="row m-3">
+                                    <div class="col-md-3">
+                                        <label for="exampleFormControlSelect1">EMPLOYEE NAME :</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" id="emp_name" name="emp_name"
+                                            placeholder="Name">
+                                    </div>
+                                </div>
+
+                                <div class="row m-3">
+                                    <div class="col-md-3">
+                                        <label for="exampleFormControlSelect1">EMPLOYEE SURNAME :</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" id="emp_surname" name="emp_surname"
+                                            placeholder="Surname">
+                                    </div>
+                                </div>
+
+                                <div class="row m-3">
+                                    <div class="col-md-3">
+                                        <label for="exampleFormControlSelect1">POSITION :</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select class="form-control" id="emp_position" name="emp_position">
+                                            <option selected>Choose</option>
+                                            <option>Excutive</option>
+                                            <option>Excutive II</option>
+                                            <option>Officer</option>
+                                            <option>Supervisor</option>
+                                            <option>Admin/Secretary</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row m-3">
+                                    <div class="col-md-3">
+                                        <label for="exampleFormControlSelect1">DEPT :</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select class="form-control" id="emp_dept" name="emp_dept">
+                                            <option selected>Choose</option>
+                                            <option>Admin</option>
+                                            <option>HR</option>
+                                            <option>Finance</option>
+                                            <option>IT</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-5  d-flex justify-content-center">
+                                    <button onclick="Reload_data()" type="submit" name="bb" id="bb"  class="btn btn-primary"> Save  </button>
+                                </div>
+                            </form>
+
+                        </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+    <footer id="main-footer" class="bg-light">
+        <div class="contrainer">
+            <div class="row">
+                <div class="col text-center py-4">
+                    <p>Copyright &copy; <span id="year"></span></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    $('#year').text(""+ new Date().getFullYear());
+    var a= document.getElementById("badgeNo").value
+    console.log(a)
+
+    // function check_data(){
+    //     if(document.getElementById("badgeNo").value==""){
+    //         alert('Please Input Badge No')
+    //         document.getElementsByName("bb").type = "submit";
+    //     }else if(document.getElementById("emp_password").value==""){
+    //         alert('Please Input Password')
+    //         document.getElementsByName("bb").type = "submit";
+    //     }else if(document.getElementById("emp_name").value == ""){
+    //         alert('Please Input Name')
+    //         document.getElementsByName("bb").type = "submit";
+    //     }else if(document.getElementById("emp_surname").value == ""){
+    //         alert('Please Input Surname')
+    //         document.getElementsByName("bb").type = "submit";
+    //     }else if(document.getElementById("emp_position").value == "Choose"){
+    //         alert('Please Select Position')
+    //         document.getElementsByName("bb").type = "submit";
+    //     }else if(document.getElementById("emp_dept").value == "Choose"){
+    //         alert('Please Select Department')
+    //         document.getElementsByName("bb").type = "submit";
+    //     }else {
+    //         document.getElementsByName("bb").type = "submit";
+    //         alert('was pressed')
+    //        // window.location.reload();
+    //     }
+    // }
+ 
+     function Reload_data(){
+         alert('was pressed')
+         document.getElementsByName("bb").type = "submit";
+        window.location.reload();
+
+     }
+
+    if (Session.get("status") != 1) {
+                window.location.href = 'https://localhost:3000/';
+            }
+        
+            function exit() {
+                exit = document.getElementById("logout").value
+                // console.log(exit)
+                var confirmexit = confirm('Do you want to logout?')
+                if (exit == "logout") {
+                    if (confirm) {
+                        // console.log("exit")
+                        // alert("Logout successfully");
+                        Session.set("status", '0');
+                        window.location = "https://localhost:3000/"; // Redirecting to other page.
+                        return false;
+                    }
+                }
+            }
+    </script>
+</body>
+
+</html>
