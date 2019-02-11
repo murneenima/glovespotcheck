@@ -44,6 +44,10 @@ var ScheduleSchema = new Schema({
     s_year:{
         type:String,
         default: "N/A"
+    },
+    s_linespotcheck:{
+        type:String,
+        default: "N/A"
     }
 })
 

@@ -271,6 +271,16 @@
                             </div>
 
                             <div class="row m-3">
+                                <div class="col-md-3">
+                                    <label for="exampleFormControlSelect1">จำนวน Line :</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="form-control" type="text" placeholder="จำนวน Line" readonly id="edit_linespotcheck"
+                                        name="edit_linespotcheck">
+                                </div>
+                            </div>
+
+                            <div class="row m-3">
                                 <button type="button" id="bb" onclick="alert_savedata()" class="btn btn-info">Add</button>
                             </div>
                             <hr style="background-color: black;">
@@ -331,13 +341,14 @@
                     document.getElementById("edit_surname").value = staffdata[i].emp_surname
                     document.getElementById("edit_position").value = staffdata[i].emp_position
                     document.getElementById("edit_dept").value = staffdata[i].emp_dept
+                    document.getElementById("edit_linespotcheck").value = staffdata[i].emp_linespotcheck
                 }
             }
         }
 
         function alert_savedata() {
             if (document.getElementById("day").value == "Choose") {
-                alert('Plssssssssssssssssssssssssssssssssssssssssss Select Day')
+                alert('Please Select Day !!!')
                 document.getElementsByName("bb").type = "submit";
             } else {
                 document.getElementsByName("bb").type = "submit";

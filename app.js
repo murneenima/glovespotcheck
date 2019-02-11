@@ -178,13 +178,15 @@ app.post('/addstaff', (req, res) => {
         emp_name: req.body.emp_name,
         emp_surname: req.body.emp_surname,
         emp_position: emp_position,
-        emp_dept: emp_dept
+        emp_dept: emp_dept,
+        emp_linespotcheck:req.body.emp_linespotcheck
     })
     newStaff.save().then((doc) => {
         console.log('success')
         res.render('admin_addStaff.hbs')
     }, (err) => {
-        res.status(400).send(err)
+        res.render('admin_error.hbs')
+       // res.status(400).send(err)
     })
 
 })
@@ -865,7 +867,8 @@ app.post('/saveschedule', (req, res) => {
         s_status: req.body.s_status,
         s_day: req.body.s_day,
         s_month: req.body.s_month,
-        s_year: req.body.s_year
+        s_year: req.body.s_year,
+        s_linespotcheck:req.body.edit_linespotcheck
     })
     newSchedule.save().then((doc) => {
         console.log('saving data to table SCHEDULE')
@@ -879,10 +882,11 @@ app.post('/saveschedule', (req, res) => {
             m_status: req.body.s_status,
             m_date: req.body.m_day,
             m_month: req.body.m_month,
-            m_year: req.body.m_year
+            m_year: req.body.m_year,
+            m_linespotcheck : req.body.edit_linespotcheck
         })
         newMonth.save().then((doc) => {
-            console.log('success to save data in table MONTH                                                                                                           ')
+            console.log('success to save data in table MONTH')                                  
             //res.send(doc)
             Staff.find({}, (err, dataStaff) => {
                 if (err) console.log(err);
@@ -901,7 +905,7 @@ app.post('/saveschedule', (req, res) => {
 
 //  Daily Schedule get staff to dailay , current table
 // !!!!!!!!! run every midnight !!!!!!!!!!!!!! 
-var j = schedule.scheduleJob('* * * * *', function () {
+var j = schedule.scheduleJob('45 * * * *', function () {
     var day_format = moment().format('dddd');
     console.log(day_format)
 
@@ -930,7 +934,8 @@ var j = schedule.scheduleJob('* * * * *', function () {
                 c_status: obj[i].s_status,
                 c_date: day,
                 c_month: month,
-                c_year: year
+                c_year: year,
+                c_linespotcheck : obj[i].s_linespotcheck
             })
 
             newCurrent.save().then((doc) => {

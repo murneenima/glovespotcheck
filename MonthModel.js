@@ -43,6 +43,10 @@ var MonthSchema = new Schema({
     m_year:{
         type:String,
         default: "N/A"
+    },
+    m_linespotcheck:{
+        type:String,
+        default: "N/A"
     }
 })
 

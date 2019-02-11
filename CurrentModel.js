@@ -44,6 +44,10 @@ var CurrentSchema = new Schema({
     c_year:{
         type:String,
     //    required:true
+    },
+    c_linespotcheck:{
+        type:String,
+    //    required:true
     }
 })
 

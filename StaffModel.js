@@ -28,6 +28,10 @@ var StaffSchema = new Schema ({
     emp_dept:{
         type:String,
         required:true
+    },
+    emp_linespotcheck:{
+        type:String,
+        required:true
     }
 })
 
