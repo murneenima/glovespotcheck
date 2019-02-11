@@ -96,12 +96,12 @@
                         </h6>
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="https://localhost:3000/dailyschedule">
+                                <a class="nav-link" href="http://localhost:3000/dailyschedule">
                                     <i class="fas fa-calendar-check"></i> Daily Schedule
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="https://localhost:3000/weeklyschedule">
+                                <a class="nav-link active" href="http://localhost:3000/weeklyschedule">
                                     <i class="fas fa-calendar-alt"></i> Weekly Schedule
                                 </a>
                             </li>
@@ -116,22 +116,22 @@
                         </h6>
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="https://localhost:3000/staff">
+                                <a class="nav-link" href="http://localhost:3000/staff">
                                     <i class="fas fa-user"></i> Add Staff
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="https://localhost:3000/send_data">
+                                <a class="nav-link" href="http://localhost:3000/send_data">
                                     <i class="fas fa-user-cog"></i> Manage Staff Data
                                 </a>
                             </li>
                              <li class="nav-item">
-                                <a class="nav-link" href="https://localhost:3000/send_staff">
+                                <a class="nav-link" href="http://localhost:3000/send_staff">
                                     <i class="fas fa-address-book"></i> Add Staff Schedule
                                 </a>
                             </li>
                              <li class="nav-item">
-                                <a class="nav-link" href="https://localhost:3000/manageschedule">
+                                <a class="nav-link" href="http://localhost:3000/manageschedule">
                                     <i class="fas fa-calendar-alt"></i> Manage Staff Schedule
                                 </a>
                             </li>
@@ -146,22 +146,22 @@
                         </h6>
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="https://localhost:3000/admin_addValue.html">
+                                <a class="nav-link" href="http://localhost:3000/value">
                                     <i class="fas fa-plus-circle"></i> Add Value
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="https://localhost:3000/sendblock">
+                                <a class="nav-link" href="http://localhost:3000/sendblock">
                                     <i class="fas fa-table"></i> Add Block
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="http://localhost:3000/addproduct">
                                     <i class="fas fa-allergies"></i> Add Product
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="https://localhost:3000/send_product">
+                                <a class="nav-link" href="http://localhost:3000/send_product">
                                     <i class="fas fa-hands"></i> All Product
                                 </a>
                             </li>
@@ -176,12 +176,12 @@
                         </h6>
                         <ul class="nav flex-column mb-2">
                             <li class="nav-item">
-                                <a class="nav-link" href="https://localhost:3000/chart">
+                                <a class="nav-link" href="http://localhost:3000/chart">
                                     <i class="far fa-chart-bar"></i> Glove Weight Report
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="https://localhost:3000/report">
+                                <a class="nav-link" href="http://localhost:3000/report">
                                     <i class="fas fa-clipboard-list"></i> Export Report
                                 </a>
                             </li>
@@ -218,7 +218,7 @@
                 </div>
                 <!--///////////////// Form Edit ///////////////////////////-->
                 <div class="modal-body">
-                    <form action="https://localhost:3000/update" method="post">
+                    <form action="http://localhost:3000/update" method="post">
                         <div class="container">
                             <div class="row m-2">
                                 <div class="col-4">
@@ -364,7 +364,7 @@
             console.log('id will delete at ' + id)
 
 
-            $.ajax('https://localhost:3000/remove', {
+            $.ajax('http://localhost:3000/remove', {
                 data: JSON.stringify({ id }),
                 contentType: 'application/json',
                 type: 'POST',
@@ -415,7 +415,7 @@
         }*/
 
         if (Session.get("status") != 1) {
-                window.location.href = 'https://glovespotcheck.herokuapp.com/';
+                window.location.href = 'http://glovespotcheck.herokuapp.com/';
             }
         
             function exit() {
@@ -427,7 +427,7 @@
                         // console.log("exit")
                         // alert("Logout successfully");
                         Session.set("status", '0');
-                        window.location = "https://localhost:3000/"; // Redirecting to other page.
+                        window.location = "http://localhost:3000/"; // Redirecting to other page.
                         return false;
                     }
                 }

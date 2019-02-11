@@ -38,7 +38,7 @@ var Alert = require('./AlertModel')
 // }, (err) => {
 //     console.log('!!!!!!!!!! error to connect with database !!!!!!!!!')
 // })
-mongoose.connect('mongodb://localhost:27017/DBglove').then((doc) => {
+mongoose.connect('mongodb://localhost:27017/Database').then((doc) => {
     console.log('@@@@ Success to connect with Database @@@')
 }, (err) => {
     console.log('!!!!!!!!!! error to connect with database !!!!!!!!!')
@@ -738,6 +738,7 @@ app.get('/send_value', (req, res) => {
         res.status(400).send('error')
     })
 })
+
 // edit product data
 app.post('/editproduct', (req, res) => {
     Product.findOne({ product_id: req.body.product_id }).then((d) => {
@@ -755,6 +756,7 @@ app.post('/editproduct', (req, res) => {
         })
     })
 })
+
 // remove product data
 app.post('/removeproduct', (req, res) => {
     console.log('dataIn :', req.body.id)
@@ -764,6 +766,7 @@ app.post('/removeproduct', (req, res) => {
         res.status(400).send(err)
     })
 })
+
 // edit block
 app.post('/removeblock', (req, res) => {
     console.log('dataIn :', req.body.id)
@@ -773,6 +776,7 @@ app.post('/removeblock', (req, res) => {
         res.status(400).send(err)
     })
 })
+
 // edit STD size
 app.post('/remove_stdsize', (req, res) => {
     console.log('dataIn :', req.body.id)
@@ -782,6 +786,7 @@ app.post('/remove_stdsize', (req, res) => {
         res.status(400).send(err)
     })
 })
+
 // delete Product line
 app.post('/remove_productline', (req, res) => {
     console.log('dataIn :', req.body.id)
@@ -791,6 +796,7 @@ app.post('/remove_productline', (req, res) => {
         res.status(400).send(err)
     })
 })
+
 // delete PD name
 app.post('/remove_productname', (req, res) => {
     console.log('dataIn :', req.body.id)
@@ -800,6 +806,7 @@ app.post('/remove_productname', (req, res) => {
         res.status(400).send(err)
     })
 })
+
 // delete PD type
 app.post('/remove_producttype', (req, res) => {
     console.log('dataIn :', req.body.id)
@@ -810,6 +817,7 @@ app.post('/remove_producttype', (req, res) => {
     })
 })
 // delete length
+
 app.post('/remove_length', (req, res) => {
     console.log('dataIn :', req.body.id)
     StdLength.remove({ std_length: req.body.id }).then((data) => {
@@ -818,6 +826,7 @@ app.post('/remove_length', (req, res) => {
         res.status(400).send(err)
     })
 })
+
 // delete weight
 app.post('/remove_weight', (req, res) => {
     console.log('dataIn :', req.body.id)
@@ -892,7 +901,7 @@ app.post('/saveschedule', (req, res) => {
 
 //  Daily Schedule get staff to dailay , current table
 // !!!!!!!!! run every midnight !!!!!!!!!!!!!! 
-var j = schedule.scheduleJob('48 * * * *', function () {
+var j = schedule.scheduleJob('* * * * *', function () {
     var day_format = moment().format('dddd');
     console.log(day_format)
 

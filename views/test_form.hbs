@@ -78,7 +78,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" id="logout" href="https://localhost:3000/userschedule"> Log out</a>
+                    <a class="nav-link" id="logout" href="http://localhost:3000/userschedule"> Log out</a>
                 </li>
             </ul>
         </div>
@@ -124,7 +124,7 @@
                 <div class="row my-3"></div>
                 <hr style="color: black;border: solid 0.3px;">
 
-                <form action="https://localhost:3000/save_data" method="POST" id="form">
+                <form action="http://localhost:3000/save_data" method="POST" id="form">
                     <div class="first" id="first">
                         <div class="row my-3">
                             <div class="col-6"><label for="formGroupExampleInput">badgeNo1</label></div>
@@ -814,26 +814,6 @@
 
         }
     }
-
-    {{!-- if (Session.get("status") != 1) {
-                window.location.href = 'http://127.0.0.1:5500/admin_login.html';
-            }
-        
-            function exit() {
-                exit = document.getElementById("logout").value
-                // console.log(exit)
-                var confirmexit = confirm('Do you want to logout?')
-                if (exit == "logout") {
-                    if (confirm) {
-                        // console.log("exit")
-                        // alert("Logout successfully");
-                        Session.set("status", '0');
-                        window.location = "login.html"; // Redirecting to other page.
-                        return false;
-                    }
-                }
-            } --}}
-
 
 
 </script>
