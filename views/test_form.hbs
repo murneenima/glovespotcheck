@@ -57,12 +57,10 @@
         })();
         </script>
     <style type="text/css">
-        #second,
-        #third,
-        #fourth,
-        #result {
-            display: none;
-        }
+    #check{
+        color: brown;
+        font-size: 20px;
+    }
     </style>
 
 </head>
@@ -86,48 +84,22 @@
 
     <div class="container" style="background-color: rgb(192, 250, 245);">
         <div class="row justify-content-center">
-            <div class="col-12">
-                <h1 class="text-center" id="result">Hello</h1>
-                <div id="pg">
-                    <div class="progress mt-4 ">
-                        <div class="progress-bar" id="progressBar" role="progressbar" style="width: 25%;" aria-valuenow="25"
-                            aria-valuemin="0" aria-valuemax="100">
-                            <b class="lead" id="progressText">Form 1</b>
-                        </div>
+            <div class="col-12">    
+
+                <div class="d-flex justify-content-end">
+                                <p class="font-weight-bold" id="check" name="check">N/A</p>
                     </div>
-                </div>
-                <div class="row mt-4  d-flex justify-content-center">
+            
+                <div class="row  d-flex justify-content-center">
                     <h5>Glove Weight Form</h5>
                 </div>
 
-
-            
-                <div class="row my-3">
-                    <div class="col">
-                        <label for="formGroupExampleInput">จำนวน Line</label>
-                    </div>
-                    <div class="col">
-                        <select class="custom-select custom-select-sm" id="line" name="line">
-                            <option disabled selected>select</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
-                    </div>
-
-                    <div class="col">
-                        <button type="button" onclick="show_form()" id="line_submit" class="btn btn-info">submit</button>
-                    </div>
-                </div>
-
-                <div class="row my-3"></div>
-                <hr style="color: black;border: solid 0.3px;">
-
                 <form action="http://localhost:3000/save_data" method="POST" id="form">
-                    <div class="first" id="first">
+
+                         
+
                         <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">badgeNo1</label></div>
+                            <div class="col-6"><label for="formGroupExampleInput">badgeNo</label></div>
                             <div class="col-6">
                                 <input type="text" data-cutid=" " id="badge1" name="badge1" class="form-control"
                                     placeholder="Badge" readonly>
@@ -187,215 +159,9 @@
                             </div>
                         </div>
 
-                        <hr style="color: black;border: solid 0.3px;">
-                        <div class="row">
-                            <a href="#" class="btn btn-danger" id="next-1">Next</a>
-                        </div>
-                    </div>
-                
-                    <div class="second" id="second">
-                        {{!-- <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">badgeNo2</label></div>
-                            <div class="col-6">
-                                <input type="text" id="bagde2" name="badge2" class="form-control" placeholder="Badge"
-                                    readonly>
-                            </div>
-                        </div> --}}
-
-                        <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">Block :</label></div>
-                            <div class="col-6"><select class="custom-select custom-select-sm" id="block2" name="block2">
-
-                                </select></div>
-                        </div>
-                        <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">Product Line :</label></div>
-                            <div class="col-6">
-                                <select class="custom-select custom-select-sm" id="productline2" name="productline2">
-
-                                </select></div>
-                        </div>
-                        <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">Product Name :</label></div>
-                            <div class="col-6"><select class="custom-select custom-select-sm" onchange="overlength_weight2()" id="productname2" name="productname2">
-
-                                </select></div>
-                        </div>
-                        <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">Product Type :</label></div>
-                            <div class="col-6"><select class="custom-select custom-select-sm" onchange="overlength_weight2()" id="producttype2" name="producttype2">
-
-                                </select></div>
-                        </div>
-                        <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">Product Size :</label></div>
-                            <div class="col-6"><select class="custom-select custom-select-sm" onchange="overlength_weight2()"
-                                    id="productsize2" name="productsize2">
-
-                                </select></div>
-                        </div>
-                        <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">Length :</label></div>
-                            <div class="col-6">
-                                <input type="text" class="form-control" placeholder="Length" id="length2" name="length2">
-                            </div>
-                            <b class="form-text text-danger" id="overlength2"></b>
-                        </div>
-                        <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">Weight :</label></div>
-                            <div class="col-6">
-                                <input type="text" class="form-control" placeholder="Weight" id="weight2" name="weight2">
-                            </div>
-                            <b class="form-text text-danger" id="overweight2"></b>
-                        </div>
-                        <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">Line Speed :</label></div>
-                            <div class="col-6">
-                                <input type="text" class="form-control" placeholder="Line Speed" id="linespeed2" name="linespeed2">
-                            </div>
-                        </div>
-
-                        <hr style="color: black;border: solid 0.3px;">
-                        <div class="row" id="bt_2">
-                            <a href="#" class="btn btn-danger" id="prev-2">Previous</a>
-                            <a href="#" class="btn btn-danger" id="next-2">Next</a>
-                        </div>
-                    </div>
-                
-                    <div class="third" id="third">
-                        {{!-- <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">badgeNo3</label></div>
-                            <div class="col-6">
-                                <input type="text" id="bagde3" name="badge3" class="form-control" placeholder="Badge"
-                                    readonly>
-                            </div>
-                        </div> --}}
-
-                        <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">Block :</label></div>
-                            <div class="col-6"><select class="custom-select custom-select-sm" id="block3" name="block3">
-
-                                </select></div>
-                        </div>
-                        <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">Product Line :</label></div>
-                            <div class="col-6">
-                                <select class="custom-select custom-select-sm" id="productline3" name="productline3">
-
-                                </select></div>
-                        </div>
-                        <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">Product Name :</label></div>
-                            <div class="col-6"><select class="custom-select custom-select-sm"  onchange="overlength_weight3()" id="productname3" name="productname3">
-
-                                </select></div>
-                        </div>
-                        <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">Product Type :</label></div>
-                            <div class="col-6"><select class="custom-select custom-select-sm"  onchange="overlength_weight3()" id="producttype3" name="producttype3">
-
-                                </select></div>
-                        </div>
-                        <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">Product Size :</label></div>
-                            <div class="col-6"><select class="custom-select custom-select-sm" id="productsize3"
-                                    onchange="overlength_weight3()" name="productsize3">
-
-                                </select></div>
-                        </div>
-                        <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">Length :</label></div>
-                            <div class="col-6">
-                                <input type="text" class="form-control" placeholder="Length" id="length3" name="length3"></div>
-                            <b class="form-text text-danger" id="overlength3"></b>
-                        </div>
-                        <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">Weight :</label></div>
-                            <div class="col-6">
-                                <input type="text" class="form-control" placeholder="Weight" id="weight3" name="weight3"></div>
-                            <b class="form-text text-danger" id="overweight3"></b>
-                        </div>
-                        <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">Line Speed :</label></div>
-                            <div class="col-6">
-                                <input type="text" class="form-control" placeholder="Line Speed" id="linespeed3" name="linespeed3">
-                            </div>
-                        </div>
-
-                        <hr style="color: black;border: solid 0.3px;">
-                        <div class="row" id="bt_3">
-                            <a href="#" class="btn btn-danger" id="prev-3">Previous</a>
-                            <a href="#" class="btn btn-danger" id="next-3">Next</a>
-                        </div>
-                    </div>
-                
-                    <div class="fourth" id="fourth">
-                        {{!-- <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">badgeNo4</label></div>
-                            <div class="col-6">
-                                <input type="text" id="bagde4" name="badge4" class="form-control" placeholder="Badge"
-                                    readonly>
-                            </div>
-                        </div> --}}
-
-                        <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">Block :</label></div>
-                            <div class="col-6"><select class="custom-select custom-select-sm" id="block4" name="block4">
-
-                                </select></div>
-                        </div>
-                        <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">Product Line :</label></div>
-                            <div class="col-6">
-                                <select class="custom-select custom-select-sm" id="productline4" name="productline4">
-
-                                </select></div>
-                        </div>
-                        <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">Product Name :</label></div>
-                            <div class="col-6"><select class="custom-select custom-select-sm"  onchange="overlength_weight4()" id="productname4" name="productname4">
-
-                                </select></div>
-                        </div>
-                        <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">Product Type :</label></div>
-                            <div class="col-6"><select class="custom-select custom-select-sm"  onchange="overlength_weight4()" id="producttype4" name="producttype4">
-
-                                </select></div>
-                        </div>
-                        <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">Product Size :</label></div>
-                            <div class="col-6"><select class="custom-select custom-select-sm" onchange="overlength_weight4()"
-                                    id="productsize4" name="productsize4">
-
-                                </select></div>
-                        </div>
-                        <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">Length :</label></div>
-                            <div class="col-6">
-                                <input type="text" class="form-control" placeholder="Length" id="length4" name="length4">
-                            </div>
-                            <b class="form-text text-danger" id="overlength4"></b>
-                        </div>
-                        <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">Weight :</label></div>
-                            <div class="col-6">
-                                <input type="text" class="form-control" placeholder="Weight" id="weight4" name="weight4"></div>
-                            <b class="form-text text-danger" id="overweight4"></b>
-                        </div>
-                        <div class="row my-3">
-                            <div class="col-6"><label for="formGroupExampleInput">Line Speed :</label></div>
-                            <div class="col-6">
-                                <input type="text" class="form-control" placeholder="Line Speed" id="linespeed4" name="linespeed4">
-                            </div>
-                        </div>
-
-                        <hr style="color: black;border: solid 0.3px;">
-                        <div class="row">
-                            <a href="#" class="btn btn-danger" id="prev-4">Previous</a>
+                        <div class="row mt-4  d-flex justify-content-center">
                             <input type="submit" name="submit" value="Submit" id="submit" class="btn btn-success">
                         </div>
-                    </div>
                 </form>
             </div>
         </div>
@@ -422,6 +188,7 @@
     var StdSize = [];
     var StdLength = [];
     var StdWeight = [];
+    var Schedule = [];
     var option_block = "<option disabled selected>select</option>"
     var option_productline = "<option disabled selected>select</option>"
     var option_productname = "<option disabled selected>select</option>"
@@ -431,7 +198,6 @@
     var option_weight = "<option disabled selected>select</option>"
 
     mm()
-    myFunction()
     function mm() {
         // ===================================================================================================//
         for (let i = 0; i < de_data.StdBlock.length; i++) {
@@ -470,53 +236,26 @@
             StdWeight.push(de_data.StdWeight[i])
             option_weight += '<option value="' + StdWeight[i].std_weight + '">' + StdWeight[i].std_weight + '</option>'
         }
+        for(let i=0;i<de_data.Schedule.length;i++){
+            Schedule.push(de_data.Schedule) 
+        console.log(Schedule[i])
+        }
         // ===================================================================================================//
         //let badge = Staff[0].badgeNo
         // document.getElementById(":first/badge").value = Staff[0].badgeNo
         display_all()
     }
      function display_all(){
-         
         document.getElementById("badge1").value = Staff[0].badgeNo
-        //document.getElementById("badge2").value = Staff[0].badgeNo
-        //document.getElementById("badge3").value = Staff[0].badgeNo
-        //document.getElementById("badge4").value = Staff[0].badgeNo
-
         document.getElementById("block1").innerHTML = option_block
-        document.getElementById("block2").innerHTML = option_block
-        document.getElementById("block3").innerHTML = option_block
-        document.getElementById("block4").innerHTML = option_block
-
         document.getElementById("productline1").innerHTML = option_productline
-        document.getElementById("productline2").innerHTML = option_productline
-        document.getElementById("productline3").innerHTML = option_productline
-        document.getElementById("productline4").innerHTML = option_productline
-
         document.getElementById("productname1").innerHTML = option_productname
-        document.getElementById("productname2").innerHTML = option_productname
-        document.getElementById("productname3").innerHTML = option_productname
-        document.getElementById("productname4").innerHTML = option_productname
-
         document.getElementById("producttype1").innerHTML = option_producttype
-        document.getElementById("producttype2").innerHTML = option_producttype
-        document.getElementById("producttype3").innerHTML = option_producttype
-        document.getElementById("producttype4").innerHTML = option_producttype
-
         document.getElementById("productsize1").innerHTML = option_productsize
-        document.getElementById("productsize2").innerHTML = option_productsize
-        document.getElementById("productsize3").innerHTML = option_productsize
-        document.getElementById("productsize4").innerHTML = option_productsize
-
         document.getElementById("length1").innerHTML = option_length
-        document.getElementById("length2").innerHTML = option_length
-        document.getElementById("length3").innerHTML = option_length
-        document.getElementById("length4").innerHTML = option_length
-
         document.getElementById("weight1").innerHTML = option_weight
-        document.getElementById("weight2").innerHTML = option_weight
-        document.getElementById("weight3").innerHTML = option_weight
-        document.getElementById("weight4").innerHTML = option_weight
 
+        
         }
 
     function overlength_weight1() {
@@ -557,264 +296,41 @@
         }
     }
 
-    function overlength_weight2() {
 
-        let selectname = document.getElementById("productname2")
-        let optionname = selectname.options[selectname.selectedIndex].value;
+    function setCookie(cname,cvalue,exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = "expires=" + d.toGMTString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
 
-        let selecttype = document.getElementById("producttype2")
-        let optiontype = selecttype.options[selecttype.selectedIndex].value;
-
-        let selectsize = document.getElementById("productsize2")
-        let optionsize = selectsize.options[selectsize.selectedIndex].value;
-
-        {{!-- console.log(optionname)
-        console.log(optiontype)
-        console.log(optionsize) --}}
-
-        if(document.getElementById("overlength2").childNodes[0]!=null){
-            let list = document.getElementById("overlength2");
-            list.removeChild(list.childNodes[0]);
-        }
-        
-        if(document.getElementById("overweight2").childNodes[0]!=null ){
-            let w_list = document.getElementById("overweight2");
-                w_list.removeChild(w_list.childNodes[0]);
-        }
-
-        if (optionname !== 'select' && optiontype !== 'select' && optionsize !== 'select') {
-            for (let i = 0; i < Product.length; i++) {
-                if (optionname == Product[i].product_name && optiontype == Product[i].product_type && optionsize == Product[i].product_size) {
-                    let l = document.createTextNode("*** Std Length " + Product[i].length_min + " mm to " + Product[i].length_max + " mm ***");
-                    document.getElementById("overlength2").appendChild(l);
-                    let w = document.createTextNode("*** Std Weight " + Product[i].weight_min + " g to " + Product[i].weight_max + " g ***");
-                    document.getElementById("overweight2").appendChild(w);
-                }
-            }
-        }
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
     }
-
-    function overlength_weight3() {
-
-        let selectname = document.getElementById("productname3")
-        let optionname = selectname.options[selectname.selectedIndex].value;
-
-        let selecttype = document.getElementById("producttype3")
-        let optiontype = selecttype.options[selecttype.selectedIndex].value;
-
-        let selectsize = document.getElementById("productsize3")
-        let optionsize = selectsize.options[selectsize.selectedIndex].value;
-
-        {{!-- console.log(optionname)
-        console.log(optiontype)
-        console.log(optionsize) --}}
-
-        if(document.getElementById("overlength3").childNodes[0]!=null){
-            let list = document.getElementById("overlength3");
-            list.removeChild(list.childNodes[0]);
-        }
-        
-        if(document.getElementById("overweight3").childNodes[0]!=null ){
-            let w_list = document.getElementById("overweight3");
-                w_list.removeChild(w_list.childNodes[0]);
-        }
-
-        if (optionname !== 'select' && optiontype !== 'select' && optionsize !== 'select') {
-            for (let i = 0; i < Product.length; i++) {
-                if (optionname == Product[i].product_name && optiontype == Product[i].product_type && optionsize == Product[i].product_size) {
-                    let l = document.createTextNode("*** Std Length " + Product[i].length_min + " mm to " + Product[i].length_max + " mm ***");
-                    document.getElementById("overlength3").appendChild(l);
-                    let w = document.createTextNode("*** Std Weight " + Product[i].weight_min + " g to " + Product[i].weight_max + " g ***");
-                    document.getElementById("overweight3").appendChild(w);
-                }
-            }
-        }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
     }
+  }
+  return "";
+}
 
-    function overlength_weight4() {
-
-        let selectname = document.getElementById("productname4")
-        let optionname = selectname.options[selectname.selectedIndex].value;
-
-        let selecttype = document.getElementById("producttype4")
-        let optiontype = selecttype.options[selecttype.selectedIndex].value;
-
-        let selectsize = document.getElementById("productsize4")
-        let optionsize = selectsize.options[selectsize.selectedIndex].value;
-
-        {{!-- console.log(optionname)
-        console.log(optiontype)
-        console.log(optionsize) --}}
-
-        if(document.getElementById("overlength4").childNodes[0]!=null){
-            let list = document.getElementById("overlength4");
-            list.removeChild(list.childNodes[0]);
-        }
-        
-        if(document.getElementById("overweight4").childNodes[0]!=null ){
-            let w_list = document.getElementById("overweight4");
-                w_list.removeChild(w_list.childNodes[0]);
-        }
-
-        if (optionname !== 'select' && optiontype !== 'select' && optionsize !== 'select') {
-            for (let i = 0; i < Product.length; i++) {
-                if (optionname == Product[i].product_name && optiontype == Product[i].product_type && optionsize == Product[i].product_size) {
-                    let l = document.createTextNode("*** Std Length " + Product[i].length_min + " mm to " + Product[i].length_max + " mm ***");
-                    document.getElementById("overlength4").appendChild(l);
-                    let w = document.createTextNode("*** Std Weight " + Product[i].weight_min + " g to " + Product[i].weight_max + " g ***");
-                    document.getElementById("overweight4").appendChild(w);
-                }
-            }
-        }
-    }
-
-    function myFunction() {
-        $("#pg").hide()
-        $("#first").hide();
-        $("#second").hide();
-        $("#third").hide();
-        $("#fourth").hide();
-
-    }
-
-    function show_form() {
-        let line = document.getElementById("line").value
-        //console.log(line)
-        document.getElementById("line_submit").disabled = true;
-        if (line == 1) {
-            // #################################################
-            $("#first").show();
-            $("#pg").show();
-            $("#progressBar").css("width", "100%")
-            $("#progressText").html("1")
-            $('<input type="submit" name="submit" value="Submit" id="submit" class="btn btn-success">').appendTo("#first");
-            $("#next-1").hide()
-           
-
-        }
-        else if (line == 2) {
-            // #################################################
-            $("#first").show();
-            $("#pg").show()
-            $("#progressBar").css("width", "50%")
-            $("#progressText").html("Form 1")
-            $('<input type="submit" name="submit" value="Submit" id="submit" class="btn btn-success">').appendTo("#bt_2");
-              
-
-            // next to page 2
-            $("#next-1").click(function () {
-                $("#second").show();
-                $("#first").hide();
-                $("#progressBar").css("width", "100%")
-                $("#progressText").html("Form 2")
-                $("#next-2").hide()
-                document.getElementById("block2").innerHTML = option_block
-                
-                })
-
-            // prev to page 1 
-            $("#prev-2").click(function () {
-                $("#first").show();
-                $("#second").hide();
-                $("#progressBar").css("width", "50%")
-                $("#progressText").html("Form 1")
-                
-            })
-
-        }
-        else if (line == 3) {
-
-            $("#first").show();
-            $("#pg").show()
-            $("#progressBar").css("width", "33%")
-            $("#progressText").html("Form 1")
-            $('<input type="submit" name="submit" value="Submit" id="submit" class="btn btn-success">').appendTo("#bt_3");
-
-            // next to page 2
-            $("#next-1").click(function () {
-                $("#second").show();
-                $("#first").hide();
-                $("#progressBar").css("width", "66%")
-                $("#progressText").html("Form 2")
-            })
-
-            // next to page 3
-            $("#next-2").click(function () {
-                $("#third").show();
-                $("#second").hide();
-                $("#progressBar").css("width", "100%")
-                $("#progressText").html("Form 3")
-                $("#next-3").hide()
-            })
-
-            //prev to page 1
-            $("#prev-2").click(function () {
-                $("#first").show();
-                $("#second").hide();
-                $("#progressBar").css("width", "33%")
-                $("#progressText").html("Form 1")
-
-            })
-            // prev to page 2
-            $("#prev-3").click(function () {
-                $("#second").show();
-                $("#third").hide();
-                $("#progressBar").css("width", "66%")
-                $("#progressText").html("Form 2")
-            })
-        }
-        else if (line == 4) {
-            $("#first").show();
-            $("#pg").show()
-            $("#progressBar").css("width", "25%")
-            $("#progressText").html("Form 1")
-
-
-            $("#next-1").click(function () {
-                $("#second").show();
-                $("#first").hide();
-                $("#progressBar").css("width", "50%")
-                $("#progressText").html("Form 2")
-            })
-
-            $("#next-2").click(function () {
-                $("#third").show();
-                $("#second").hide();
-                $("#progressBar").css("width", "75%")
-                $("#progressText").html("Form 3")
-            })
-
-            $("#next-3").click(function () {
-                $("#fourth").show();
-                $("#third").hide();
-                $("#progressBar").css("width", "100%")
-                $("#progressText").html("Form 4")
-            })
-
-            $("#prev-2").click(function () {
-                $("#first").show();
-                $("#second").hide();
-                $("#progressBar").css("width", "25%")
-                $("#progressText").html("Form 1")
-            })
-
-            $("#prev-3").click(function () {
-                $("#second").show();
-                $("#third").hide();
-                $("#progressBar").css("width", "50%")
-                $("#progressText").html("Form 2")
-            })
-
-            $("#prev-4").click(function () {
-                $("#third").show();
-                $("#fourth").hide();
-                $("#progressBar").css("width", "75%")
-                $("#progressText").html("Form 3")
-            })
-
-        }
-    }
-
+function checkCookie() {
+  var user=getCookie("username");
+  if (user != "") {
+    alert("Welcome again " + user);
+  } else {
+     user = prompt("Please enter your name:","");
+     if (user != "" && user != null) {
+       setCookie("username", user, 30);
+     }
+  }
+}
 
 </script>
 

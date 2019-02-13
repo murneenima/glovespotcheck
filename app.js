@@ -69,7 +69,7 @@ app.use((req, res, next) => { // allow the other to connect
 app.get('/', (req, res) => {
     res.render('admin_login.hbs')
     console.log('Hello')
-   //res.send('Hello')
+    //res.send('Hello')
 })
 
 // add value 
@@ -179,14 +179,14 @@ app.post('/addstaff', (req, res) => {
         emp_surname: req.body.emp_surname,
         emp_position: emp_position,
         emp_dept: emp_dept,
-        emp_linespotcheck:req.body.emp_linespotcheck
+        emp_linespotcheck: req.body.emp_linespotcheck
     })
     newStaff.save().then((doc) => {
         console.log('success')
         res.render('admin_addStaff.hbs')
     }, (err) => {
         res.render('admin_error.hbs')
-       // res.status(400).send(err)
+        // res.status(400).send(err)
     })
 
 })
@@ -868,7 +868,7 @@ app.post('/saveschedule', (req, res) => {
         s_day: req.body.s_day,
         s_month: req.body.s_month,
         s_year: req.body.s_year,
-        s_linespotcheck:req.body.edit_linespotcheck
+        s_linespotcheck: req.body.edit_linespotcheck
     })
     newSchedule.save().then((doc) => {
         console.log('saving data to table SCHEDULE')
@@ -883,10 +883,10 @@ app.post('/saveschedule', (req, res) => {
             m_date: req.body.m_day,
             m_month: req.body.m_month,
             m_year: req.body.m_year,
-            m_linespotcheck : req.body.edit_linespotcheck
+            m_linespotcheck: req.body.edit_linespotcheck
         })
         newMonth.save().then((doc) => {
-            console.log('success to save data in table MONTH')                                  
+            console.log('success to save data in table MONTH')
             //res.send(doc)
             Staff.find({}, (err, dataStaff) => {
                 if (err) console.log(err);
@@ -905,7 +905,7 @@ app.post('/saveschedule', (req, res) => {
 
 //  Daily Schedule get staff to dailay , current table
 // !!!!!!!!! run every midnight !!!!!!!!!!!!!! 
-var j = schedule.scheduleJob('45 * * * *', function () {
+var j = schedule.scheduleJob('* * * * *', function () {
     var day_format = moment().format('dddd');
     console.log(day_format)
 
@@ -923,7 +923,7 @@ var j = schedule.scheduleJob('45 * * * *', function () {
     Schedule.find({ day: day_format }, (err, obj) => {
         for (let i = 0; i < obj.length; i++) {
             var name = obj[i].s_name;
-            console.log(name)
+            //console.log(name)
             let newCurrent = Current({
                 current_day: obj[i].day,
                 c_badgeNo: obj[i].s_badgeNo,
@@ -935,10 +935,11 @@ var j = schedule.scheduleJob('45 * * * *', function () {
                 c_date: day,
                 c_month: month,
                 c_year: year,
-                c_linespotcheck : obj[i].s_linespotcheck
+                c_linespotcheck: obj[i].s_linespotcheck
             })
 
             newCurrent.save().then((doc) => {
+                console.log('is UPdated date on Current table // (weekly)')
                 Schedule.findOne({ s_badgeNo: obj[i].s_badgeNo }, function (err, data) {
                     if (data) {
                         data.s_day = day
@@ -1254,7 +1255,7 @@ var j = schedule.scheduleJob('59 * * * *', function () {
 
 
         let row = 2;
-        let var_weight = "" ;
+        let var_weight = "";
         for (let j = 0; j < cur.length; j++) {
             ws3.cell(row, 1).string("" + cur[j].spot_day + " " + cur[j].spot_month + " " + cur[j].spot_year);
             ws3.cell(row, 2).string("" + cur[j].spot_badge);
@@ -1267,9 +1268,9 @@ var j = schedule.scheduleJob('59 * * * *', function () {
             ws3.cell(row, 11).string("" + cur[j].spot_length);
             ws3.cell(row, 14).string("" + cur[j].spot_linespeed);
             Product.find({ product_name: cur[j].spot_productname, product_type: cur[j].spot_producttypes }, function (err, cur2) {
-                ws3.cell(row, 9).string("" + cur2[j].weight_min+"-"+cur2[j].weight_max);
-                if(cur[j].spot_weight>cur2[j].weight_max){
-                    var_weight = "+"+ cur2[j].weight_max-cur[j].spot_weight            
+                ws3.cell(row, 9).string("" + cur2[j].weight_min + "-" + cur2[j].weight_max);
+                if (cur[j].spot_weight > cur2[j].weight_max) {
+                    var_weight = "+" + cur2[j].weight_max - cur[j].spot_weight
                 }
                 ws3.cel
             }, (err) => {
@@ -1413,8 +1414,8 @@ app.get('/userlogin', (req, res) => {
     res.render('user_login.hbs', {})
 })
 
-// check login 
 app.post('/check_login', (req, res) => {
+
     let data = {}
     let badgeNo = req.body.badgeNo1
     let emp_password = req.body.password
@@ -1468,10 +1469,17 @@ app.post('/check_login', (req, res) => {
                                                     if (err) console.log(err)
                                                 }).then((producttype) => {
                                                     data.StdProductType = producttype
-                                                    res.render('test_form.hbs', { data: encodeURI(JSON.stringify(data)) })
-                                                }, (err) => {
-                                                    res.status(400).send(err)
+
+                                                    Schedule.findOne({ s_badgeNo: req.body.badgeNo1 }, (err, schedule) => {
+                                                        if (err) console.log(err)
+                                                    }).then((schedule) => {
+                                                        data.Schedule = schedule
+                                                        res.render('test_form.hbs', { data: encodeURI(JSON.stringify(data)) })
+                                                    }, (err) => {
+                                                        res.status(400).send(err)
+                                                    })
                                                 })
+
                                             })
                                         })
                                     })
@@ -1521,6 +1529,8 @@ app.post('/save_data', (req, res) => {
             console.log(length1)
             console.log(weight1)
 
+
+
             Product.findOne({ product_type: req.body.producttype1, product_name: req.body.productname1 }).then((d) => {
 
                 Block.findOne({ productLine: req.body.productline1 }, function (err, data) {
@@ -1535,7 +1545,6 @@ app.post('/save_data', (req, res) => {
                     } else {
                         console.log(err)
                     }
-
                 })
 
                 let length_min = parseFloat(d.length_min);
@@ -1546,6 +1555,7 @@ app.post('/save_data', (req, res) => {
                 //Chack length 
                 if (length1 > length_max) {
                     console.log('!!!!!OVER length !!!!!')
+
                     request({
                         method: 'POST',
                         uri: 'https://notify-api.line.me/api/notify',
@@ -1556,7 +1566,7 @@ app.post('/save_data', (req, res) => {
                             bearer: 'lZCZt4ehQD2q68XKhkgEMcHYs4yncRuM5VX0LSzaOrb', //token
                         },
                         form: {
-                            message: 'Product Name : ' + d.product_name + '-' + d.product_type + '  SIZE : ' + d.product_size + ' is OVER LENGTH !!!!! ', //ข้อความที่จะส่ง
+                            message: 'TYPE : ' + d.product_name + '-' + d.product_type + '  SIZE : ' + d.product_size + ' is OVER LENGTH !!!!! ' + ' at Production Line : ' + req.body.productline1 + "   Block : " + req.body.block1, //ข้อความที่จะส่ง
 
                         },
                     }, (err, httpResponse, body) => {
@@ -1579,7 +1589,7 @@ app.post('/save_data', (req, res) => {
                             bearer: 'lZCZt4ehQD2q68XKhkgEMcHYs4yncRuM5VX0LSzaOrb', //token
                         },
                         form: {
-                            message: 'Product Name : ' + d.product_name + '-' + d.product_type + '  SIZE : ' + d.product_size + ' is UNDER LENGTH !!!!! น้อยกว่ามาตรฐาน', //ข้อความที่จะส่ง
+                            message: 'TYPE : ' + d.product_name + '-' + d.product_type + '  SIZE : ' + d.product_size + ' is UNDER LENGTH !!!!!' + '  at Production Line : ' + req.body.productline1 + "   Block : " + req.body.block1, //ข้อความที่จะส่ง
 
                         },
                     }, (err, httpResponse, body) => {
@@ -1604,7 +1614,7 @@ app.post('/save_data', (req, res) => {
                             bearer: 'lZCZt4ehQD2q68XKhkgEMcHYs4yncRuM5VX0LSzaOrb', //token
                         },
                         form: {
-                            message: 'Product Name : ' + d.product_name + '-' + d.product_type + '  SIZE : ' + d.product_size + ' is UNDER WEIGHT !!!!!', //ข้อความที่จะส่ง
+                            message: 'TYPE: ' + d.product_name + '-' + d.product_type + '  SIZE : ' + d.product_size + ' is UNDER WEIGHT !!!!!' + '  at Production Line : ' + req.body.productline1 + "   Block : " + req.body.block1, //ข้อความที่จะส่ง
 
                         },
                     }, (err, httpResponse, body) => {
@@ -1628,7 +1638,7 @@ app.post('/save_data', (req, res) => {
                             bearer: 'lZCZt4ehQD2q68XKhkgEMcHYs4yncRuM5VX0LSzaOrb', //token
                         },
                         form: {
-                            message: 'Product Name : ' + d.product_name + '-' + d.product_type + '  SIZE : ' + d.product_size + ' is OVER WEIGHT !!!!!', //ข้อความที่จะส่ง
+                            message: 'TYPE : ' + d.product_name + '-' + d.product_type + '  SIZE : ' + d.product_size + ' is OVER WEIGHT !!!!!' + ' at Production Line : ' + req.body.productline1 + "   Block : " + req.body.block1, //ข้อความที่จะส่ง
 
                         },
                     }, (err, httpResponse, body) => {
@@ -1641,6 +1651,7 @@ app.post('/save_data', (req, res) => {
 
                 }
 
+                //Save  ข้อมูลลง alert table
                 if (length1 > length_max || length1 < length_min || weight1 < weight_min || weight1 > weight_max) {
                     let newAlert2 = new Alert({
                         a_time: time,
@@ -1672,66 +1683,131 @@ app.post('/save_data', (req, res) => {
             }, (err) => {
                 res.status(400).send(err)
             })
-            let newSpotscheck = new Spotcheck({
-                spot_badge: req.body.badge1,
-                spot_name: name,
-                spot_surname: surname,
-                spot_time: time,
-                spot_date: date,
-                spot_day: day,
-                spot_month: month,
-                spot_year: year,
-                spot_block: req.body.block1,
-                spot_productline: req.body.productline1,
-                spot_productname: req.body.productname1,
-                spot_producttype: req.body.producttype1,
-                spot_size: req.body.productsize1,
-                spot_length: req.body.length1,
-                spot_weight: req.body.weight1,
-                spot_linespeed: req.body.linespeed1
-            })
-            newSpotscheck.save().then((doc) => {
-                console.log('success to save data on SPOTCHECK ====1==== table')
 
-                let check = "checked"
-                // save status to Current block 
-                Current.findOne({ c_badgeNo: req.body.badge1 }, function (err, current) {
-                    if (current) {
-                        current.c_status = check
-                        current.save(function (err) {
-                            if (err) // do something
-                                console.log('is fail to update status on CURRENT table')
-                            else
-                                console.log('is UPdated status on CURRENT table')
 
-                            // save status to Current block 
-                            Schedule.findOne({ s_badgeNo: req.body.badge1 }, function (err, schedule) {
-                                if (schedule) {
-                                    schedule.s_status = check
-                                    schedule.save(function (err) {
-                                        if (err) // do something
-                                            console.log('is fail to update status on SCHEDULE table')
-                                        else
-                                            console.log('is UPdated status on SCHEDULE table')
-                                    });
-                                } else {
-                                    console.log(err)
-                                }
-                            })
-                        });
-                    } else {
-                        console.log(err)
-                    }
-                })
-                res.render('user_success.hbs')
+            // save status to Current block 
+            Schedule.findOne({ s_badgeNo: req.body.badge1 }, function (err, schedule) {
+                if (schedule) {
+                    schedule.s_check += 1
+                    schedule.save(function (err) {
+                        if (err) // do something
+                            console.log('is fail to update status on SCHEDULE table')
+                        else
+                            console.log('is UPdated status on SCHEDULE table')
+
+                        // save data to spot check
+                        let newSpotscheck = new Spotcheck({
+                            spot_badge: req.body.badge1,
+                            spot_name: name,
+                            spot_surname: surname,
+                            spot_time: time,
+                            spot_date: date,
+                            spot_day: day,
+                            spot_month: month,
+                            spot_year: year,
+                            spot_block: req.body.block1,
+                            spot_productline: req.body.productline1,
+                            spot_productname: req.body.productname1,
+                            spot_producttype: req.body.producttype1,
+                            spot_size: req.body.productsize1,
+                            spot_length: req.body.length1,
+                            spot_weight: req.body.weight1,
+                            spot_linespeed: req.body.linespeed1,
+                            spot_check: schedule.s_check
+                        })
+                        newSpotscheck.save().then((doc) => {
+                            console.log('success to save data on SPOTCHECK table')
+                            res.render('user_success.hbs')
+                        }, (err) => {
+                            res.status(400).send(err)
+                        })
+                    });
+
+                } else {
+                    console.log(err)
+                }
             })
+
+
+
+
+        }, (err) => {
+            res.status(400).send(err)
         })
+
+
+
+
     } else {
         res.send('Please fill corrrect information in form 1')
     }
 })
 
+// app.get('/form', (req, res) => {
+//     let data = {}
+//      // block 
+//      StdBlock.find({}, (err, datablock) => {
+//         if (err) console.log(err)
+//     }).then((datablock) => {
+//         data.StdBlock = datablock
+//         // product bame , prduct type
+//         Product.find({}, (err, dataproduct) => {
+//             if (err) console.log(err)
+//         }).then((dataproduct) => {
+//             data.Product = dataproduct
+//             //  Size
+//             StdSize.find({}, (err, datasize) => {
+//                 if (err) console.log(err)
+//             }).then((datasize) => {
+//                 data.StdSize = datasize
+//                 // Std Length
+//                 StdLength.find({}, (err, datalength) => {
+//                     if (err) console.log(err)
+//                 }).then((datalength) => {
+//                     data.StdLength = datalength
+//                     //Std weight
+//                     StdWeight.find({}, (err, dataweight) => {
+//                         if (err) console.log(err)
+//                     }).then((dataweight) => {
+//                         data.StdWeight = dataweight
 
+//                         StdProductline.find({}, (err, dataproductline) => {
+//                             if (err) console.log(err)
+//                         }).then((dataproductline) => {
+//                             data.StdProductline = dataproductline
+
+//                             StdProductName.find({}, (err, dataProductname) => {
+//                                 if (err) console.log(err)
+//                             }).then((dataProductname) => {
+//                                 data.StdProductName = dataProductname
+
+//                                 StdProductType.find({}, (err, producttype) => {
+//                                     if (err) console.log(err)
+//                                 }).then((producttype) => {
+//                                     data.StdProductType = producttype
+
+//                                     Schedule.findOne({s_badgeNo:req.body.badgeNo1},(err,schedule)=>{
+//                                         if (err) console.log(err)
+//                                     }).then((schedule)=>{
+//                                         data.Schedule = schedule
+//                                         res.render('test_form.hbs', { data: encodeURI(JSON.stringify(data)) })
+
+//                                     }, (err) => {
+//                                         res.status(400).send(err)
+//                                     })
+//                                 })
+//                             })
+//                         })
+//                     })
+
+//                 })
+
+//             })
+
+//         })
+//     })
+
+// })
 //########################################  Port #################################################
 // app.listen(process.env.PORT || 3000, () => {
 //     console.log('listin port 3000')

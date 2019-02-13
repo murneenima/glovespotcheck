@@ -66,6 +66,10 @@ var SpotcheckSchema = new Schema({
     spot_linespeed:{
         type:String,
         required:true
+    },
+    spot_check:{
+        type:Number,
+        default : "0"
     }
 })
 

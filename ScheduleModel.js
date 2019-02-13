@@ -48,6 +48,10 @@ var ScheduleSchema = new Schema({
     s_linespotcheck:{
         type:String,
         default: "N/A"
+    },
+    s_check:{
+        type:Number,
+        default : "0"
     }
 })
 
