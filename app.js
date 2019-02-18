@@ -1139,20 +1139,20 @@ app.post('/export_alert', (req, res) => {
     });
 
     Alert.find({ a_month: req.body.month2, a_year: req.body.year2 }, function (err, al) {
-        ws2.cell(1, 1).string("Time").style(numStyle);
-        ws2.cell(1, 2).string("Date").style(numStyle);
-        ws2.cell(1, 3).string("Badge No").style(numStyle);
-        ws2.cell(1, 4).string("Name Surname").style(numStyle);
-        ws2.cell(1, 5).string("Depatment").style(numStyle);
-        ws2.cell(1, 6).string("Block").style(numStyle);
-        ws2.cell(1, 7).string("Product Line").style(numStyle);
-        ws2.cell(1, 8).string("Product ID").style(numStyle);
-        ws2.cell(1, 9).string("Productname").style(numStyle);
-        ws2.cell(1, 10).string("STD Length").style(numStyle);
-        ws2.cell(1, 11).string("Length").style(numStyle);
-        ws2.cell(1, 12).string("STD Weight").style(numStyle);
-        ws2.cell(1, 13).string("Weight").style(numStyle);
-        ws2.cell(1, 14).string("Line Speed").style(numStyle);
+        ws2.cell(1, 1).string("Date").style(numStyle);
+        ws2.cell(1, 2).string("Badge No").style(numStyle);
+        ws2.cell(1, 3).string("Name").style(numStyle);
+        ws2.cell(1, 4).string("Time").style(numStyle);
+        ws2.cell(1, 5).string("LINE").style(numStyle);
+        ws2.cell(1, 6).string("TYPE").style(numStyle);
+        ws2.cell(1, 7).string("SIZE").style(numStyle);
+        ws2.cell(1, 8).string("WEIGHT").style(numStyle);
+        ws2.cell(1, 9).string("STANDARD WEIGHT/G").style(numStyle);
+        ws2.cell(1, 10).string("VARIANCE").style(numStyle);
+        ws2.cell(1, 11).string("LENGTH/MM").style(numStyle);
+        ws2.cell(1, 12).string("STANDARD LENGTH/MM").style(numStyle);
+        ws2.cell(1, 13).string("VARIANCE").style(numStyle);
+        ws2.cell(1, 14).string("LINE SPEED").style(numStyle);
 
         let row2 = 2;
         for (let i = 0; i < al.length; i++) {
