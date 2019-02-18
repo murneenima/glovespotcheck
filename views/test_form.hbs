@@ -173,7 +173,7 @@
 
     var data = "{{data}}"
     var de_data = JSON.parse(decodeURI(data))
-    //console.log(de_data)
+    console.log(de_data.Schedule)
     //  console.log(de_data.Product)
     //  console.log(de_data.Staff)
     //  console.log(de_data.StdLength)
@@ -196,6 +196,10 @@
     var option_productsize = "<option disabled selected>select</option>"
     var option_length = "<option disabled selected>select</option>"
     var option_weight = "<option disabled selected>select</option>"
+    var check = de_data.Schedule.s_check
+    var line_check = de_data.Schedule.s_linespotcheck
+    check ++
+   
 
     mm()
     function mm() {
@@ -236,10 +240,10 @@
             StdWeight.push(de_data.StdWeight[i])
             option_weight += '<option value="' + StdWeight[i].std_weight + '">' + StdWeight[i].std_weight + '</option>'
         }
-        for(let i=0;i<de_data.Schedule.length;i++){
-            Schedule.push(de_data.Schedule) 
-        console.log(Schedule[i])
-        }
+     
+            console.log(check)
+            console.log('------')
+            console.log(line_check)
         // ===================================================================================================//
         //let badge = Staff[0].badgeNo
         // document.getElementById(":first/badge").value = Staff[0].badgeNo
@@ -254,6 +258,7 @@
         document.getElementById("productsize1").innerHTML = option_productsize
         document.getElementById("length1").innerHTML = option_length
         document.getElementById("weight1").innerHTML = option_weight
+        document.getElementById("check").innerHTML = check+ "/"+line_check 
 
         
         }

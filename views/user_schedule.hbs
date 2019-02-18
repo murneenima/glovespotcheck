@@ -85,20 +85,21 @@
 
     for (let i = 0; i < de_data.block.length; i++) {
         block.push(de_data.block[i])
-        console.log(block[i])
+       // console.log(block[i])
     }
     for (let i = 0; i < de_data.staffschedule.length; i++) {
         user_schedule.push(de_data.staffschedule[i])
-        console.log(user_schedule[i])
+       // console.log(user_schedule[i])
     }
 
     for (let i=0;i<user_schedule.length;i++) {
-            //if(user_schedule[i].c_status == "checked"){
-                // table_staff += "<tr><td>" + user_schedule[i].c_badgeNo + "</td><td>" + user_schedule[i].c_name + " " + user_schedule[i].c_surname + "</td><td>" + user_schedule[i].c_department + " , " + user_schedule[i].c_position + "</td><td>"++user_schedule[i].c_status+"</td><td>"+"</td></tr>"
-           // }else{
+            if(user_schedule[i].c_status == "checked"){
+                //console.log(user_schedule[i])
+                 table_staff += "<tr><td>" + user_schedule[i].c_badgeNo + "</td><td>" + user_schedule[i].c_name + " " + user_schedule[i].c_surname + "</td><td>" + user_schedule[i].c_department + " , " + user_schedule[i].c_position + "</td><td>"+user_schedule[i].c_linespotcheck+"</td><td>"+user_schedule[i].c_status+"</td></tr>"
+            }else{
                  table_staff += "<tr><td><a href='/userlogin'>" + user_schedule[i].c_badgeNo + "</td><td>" + user_schedule[i].c_name + " " + user_schedule[i].c_surname + "</td><td>" + user_schedule[i].c_department + " , " + user_schedule[i].c_position + "</td><td>"+user_schedule[i].c_linespotcheck+"</td><td>"+user_schedule[i].c_status+"</td></tr>"
      
-           // }
+            }
         }
     {{!-- for (let i=0;i<user_schedule.length;i++) {
              table_staff += "<tr><td><a href='/userlogin'>" + user_schedule[i].c_badgeNo + "</td><td>" + user_schedule[i].c_name + " " + user_schedule[i].c_surname + "</td><td>" + user_schedule[i].c_department + " , " + user_schedule[i].c_position + "</td><td>"+user_schedule[i].c_status+"</td></tr>"

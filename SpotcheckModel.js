@@ -55,6 +55,22 @@ var SpotcheckSchema = new Schema({
         type:String,
         required:true
     },
+    spot_stdlength_min:{
+        type:String,
+        required:true
+    },
+    spot_stdlength_max:{
+        type:String,
+        required:true
+    },
+    spot_stdweight_min:{
+        type:String,
+        required:true
+    },
+    spot_stdweight_max:{
+        type:String,
+        required:true
+    },
     spot_length:{
         type:String,
         required:true
