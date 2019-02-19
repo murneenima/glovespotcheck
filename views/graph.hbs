@@ -257,7 +257,7 @@
         var n = month[d.getMonth()];
         for (let i = 0; i < de_spotcheck.length; i++) {
             staff_spotcheck.push(de_spotcheck[i])
-            //console.log(staff_spotcheck[i])
+            console.log(staff_spotcheck[i])
 
             if (staff_spotcheck[i].spot_month == n) {
                 if(staff_spotcheck[i].spot_date == 'Monday'){
@@ -303,7 +303,7 @@
                         0: { side: 'top', label: 'Bar Chart' } // Top x-axis.
                     }
                 },
-                bar: { groupWidth: "80%" }
+                bar: { groupWidth: "90%" }
             };
 
             var chart = new google.charts.Bar(document.getElementById('top_x_div'));

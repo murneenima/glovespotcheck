@@ -81,6 +81,7 @@ app.get('/value', (req, res) => {
 app.get('/report', (req, res) => {
     res.render('admin_exportReport.hbs')
 })
+
 // add staff 
 app.get('/staff', (req, res) => {
     res.render('admin_addStaff.hbs')
@@ -1156,19 +1157,48 @@ app.post('/export_alert', (req, res) => {
 
         let row2 = 2;
         for (let i = 0; i < al.length; i++) {
-            ws2.cell(row2, 1).string("" + al[i].a_time);
-            ws2.cell(row2, 2).string("" + al[i].a_day + " " + al[i].a_date + " " + al[i].a_month + " " + al[i].a_year);
-            ws2.cell(row2, 3).string("" + al[i].a_badgeNo);
-            ws2.cell(row2, 4).string("" + al[i].a_name + " " + al[i].a_surname);
-            ws2.cell(row2, 5).string("" + al[i].a_dept);
-            ws2.cell(row2, 6).string("" + al[i].a_block);
-            ws2.cell(row2, 7).string("" + al[i].a_productline);
-            ws2.cell(row2, 8).string("" + al[i].a_productID);
-            ws2.cell(row2, 9).string("" + al[i].a_productName + "-" + al[i].a_productType);
-            ws2.cell(row2, 10).string("" + al[i].a_stdlength_min + "-" + al[i].a_stdlength_max);
+            let std_lenghtmin = parseFloat(al[i].a_stdlength_min)
+            let std_lenghtmax = parseFloat(al[i].a_stdlength_max)
+            let std_weightmin = parseFloat(al[i].a_stdweight_min)
+            let std_weightmax = parseFloat(al[i].a_stdweight_max)
+            
+            let s_length = parseFloat(al[i].a_length)
+            let s_weight = parseFloat(al[i].a_weight)
+            //================================================
+            if (s_length < std_lenghtmin) {
+                var_length = "-" + (std_lenghtmin - s_length)
+                console.log(var_length)
+            }else if (s_length > std_lenghtmax) {
+                    var_length = "+" + (s_length - std_lenghtmax)
+                    console.log(var_length)
+            }else  var_length = "0.0"; 
+                
+            // ================================================
+            if (s_weight < std_weightmin) {
+                var_weight = "-" + (std_weightmin - s_weight)
+                console.log(var_weight)
+            }else {
+                if (s_weight > std_weightmax) {
+                    var_weight = "+" + (s_weight - std_weightmax)
+                    console.log(var_weight)
+                }else{
+                    var_weight = "0.0"; 
+                }
+            }
+
+            ws2.cell(row2, 1).string("" + al[i].a_day + " " + al[i].a_date + " " + al[i].a_month + " " + al[i].a_year);
+            ws2.cell(row2, 2).string("" + al[i].a_badgeNo);
+            ws2.cell(row2, 3).string("" + al[i].a_name + " " + al[i].a_surname);
+            ws2.cell(row2, 4).string("" + al[i].a_time);
+            ws2.cell(row2, 5).string("" + al[i].a_productline);
+            ws2.cell(row2, 6).string("" + al[i].a_productName + "-" + al[i].a_productType);
+            ws2.cell(row2, 7).string("" + al[i].a_productSize);
+            ws2.cell(row2, 8).string("" + al[i].a_weight);
+            ws2.cell(row2, 9).string("" + al[i].a_stdweight_min + "-" + al[i].a_stdweight_max);
+            ws2.cell(row2, 10).string("" + var_weight); // variance
             ws2.cell(row2, 11).string("" + al[i].a_length);
-            ws2.cell(row2, 12).string("" + al[i].a_stdweight_min + "-" + al[i].a_stdweight_max);
-            ws2.cell(row2, 13).string("" + al[i].a_weight);
+            ws2.cell(row2, 12).string("" + al[i].a_stdlength_min + "-" + al[i].a_stdlength_max);
+            ws2.cell(row2, 13).string("" + var_length); // variance length
             ws2.cell(row2, 14).string("" + al[i].a_linespeed);
             row2++
         }
@@ -1214,48 +1244,73 @@ var j = schedule.scheduleJob('34 * * * *', function () {
         },
         numberFormat: '$#,##0.00; ($#,##0.00); -'
     });
-    Alert.find({}, function (err, al) {
-        ws2.cell(1, 1).string("Time").style(numStyle);
-        ws2.cell(1, 2).string("Date").style(numStyle);
-        ws2.cell(1, 3).string("Badge No").style(numStyle);
-        ws2.cell(1, 4).string("Name Surname").style(numStyle);
-        ws2.cell(1, 5).string("Depatment").style(numStyle);
-        ws2.cell(1, 6).string("Block").style(numStyle);
-        ws2.cell(1, 7).string("Product Line").style(numStyle);
-        ws2.cell(1, 8).string("Product ID").style(numStyle);
-        ws2.cell(1, 9).string("Productname").style(numStyle);
-        ws2.cell(1, 10).string("STD Length").style(numStyle);
-        ws2.cell(1, 11).string("Length").style(numStyle);
-        ws2.cell(1, 12).string("STD Weight").style(numStyle);
-        ws2.cell(1, 13).string("Weight").style(numStyle);
-        ws2.cell(1, 14).string("Line Speed").style(numStyle);
+    Alert.find({ a_month: req.body.month2, a_year: req.body.year2 }, function (err, al) {
+        ws2.cell(1, 1).string("Date").style(numStyle);
+        ws2.cell(1, 2).string("Badge No").style(numStyle);
+        ws2.cell(1, 3).string("Name").style(numStyle);
+        ws2.cell(1, 4).string("Time").style(numStyle);
+        ws2.cell(1, 5).string("LINE").style(numStyle);
+        ws2.cell(1, 6).string("TYPE").style(numStyle);
+        ws2.cell(1, 7).string("SIZE").style(numStyle);
+        ws2.cell(1, 8).string("WEIGHT").style(numStyle);
+        ws2.cell(1, 9).string("STANDARD WEIGHT/G").style(numStyle);
+        ws2.cell(1, 10).string("VARIANCE").style(numStyle);
+        ws2.cell(1, 11).string("LENGTH/MM").style(numStyle);
+        ws2.cell(1, 12).string("STANDARD LENGTH/MM").style(numStyle);
+        ws2.cell(1, 13).string("VARIANCE").style(numStyle);
+        ws2.cell(1, 14).string("LINE SPEED").style(numStyle);
 
         let row2 = 2;
         for (let i = 0; i < al.length; i++) {
-            ws2.cell(row2, 1).string("" + al[i].a_time);
-            ws2.cell(row2, 2).string("" + al[i].a_day + " " + al[i].a_date + " " + al[i].a_month + " " + al[i].a_year);
-            ws2.cell(row2, 3).string("" + al[i].a_badgeNo);
-            ws2.cell(row2, 4).string("" + al[i].a_name + " " + al[i].a_surname);
-            ws2.cell(row2, 5).string("" + al[i].a_dept);
-            ws2.cell(row2, 6).string("" + al[i].a_block);
-            ws2.cell(row2, 7).string("" + al[i].a_productline);
-            ws2.cell(row2, 8).string("" + al[i].a_productID);
-            ws2.cell(row2, 9).string("" + al[i].a_productName + "-" + al[i].a_productType);
-            ws2.cell(row2, 10).string("" + al[i].a_stdlength_min + "-" + al[i].a_stdlength_max);
+            let std_lenghtmin = parseFloat(al[i].a_stdlength_min)
+            let std_lenghtmax = parseFloat(al[i].a_stdlength_max)
+            let std_weightmin = parseFloat(al[i].a_stdweight_min)
+            let std_weightmax = parseFloat(al[i].a_stdweight_max)
+            
+            let s_length = parseFloat(al[i].a_length)
+            let s_weight = parseFloat(al[i].a_weight)
+            //================================================
+            if (s_length < std_lenghtmin) {
+                var_length = "-" + (std_lenghtmin - s_length)
+                console.log(var_length)
+            }else if (s_length > std_lenghtmax) {
+                    var_length = "+" + (s_length - std_lenghtmax)
+                    console.log(var_length)
+            }else  var_length = "0.0"; 
+                
+            // ================================================
+            if (s_weight < std_weightmin) {
+                var_weight = "-" + (std_weightmin - s_weight)
+                console.log(var_weight)
+            }else {
+                if (s_weight > std_weightmax) {
+                    var_weight = "+" + (s_weight - std_weightmax)
+                    console.log(var_weight)
+                }else{
+                    var_weight = "0.0"; 
+                }
+            }
+
+            ws2.cell(row2, 1).string("" + al[i].a_day + " " + al[i].a_date + " " + al[i].a_month + " " + al[i].a_year);
+            ws2.cell(row2, 2).string("" + al[i].a_badgeNo);
+            ws2.cell(row2, 3).string("" + al[i].a_name + " " + al[i].a_surname);
+            ws2.cell(row2, 4).string("" + al[i].a_time);
+            ws2.cell(row2, 5).string("" + al[i].a_productline);
+            ws2.cell(row2, 6).string("" + al[i].a_productName + "-" + al[i].a_productType);
+            ws2.cell(row2, 7).string("" + al[i].a_productSize);
+            ws2.cell(row2, 8).string("" + al[i].a_weight);
+            ws2.cell(row2, 9).string("" + al[i].a_stdweight_min + "-" + al[i].a_stdweight_max);
+            ws2.cell(row2, 10).string("" + var_weight); // variance
             ws2.cell(row2, 11).string("" + al[i].a_length);
-            ws2.cell(row2, 12).string("" + al[i].a_stdweight_min + "-" + al[i].a_stdweight_max);
-            ws2.cell(row2, 13).string("" + al[i].a_weight);
+            ws2.cell(row2, 12).string("" + al[i].a_stdlength_min + "-" + al[i].a_stdlength_max);
+            ws2.cell(row2, 13).string("" + var_length); // variance length
             ws2.cell(row2, 14).string("" + al[i].a_linespeed);
             row2++
         }
-        wb2.write('outofstandard.xlsx', function (err, stats) {
-            if (err) {
-                console.error(err);
-            } else {
-                console.log(stats); // Prints out an instance of a node.js fs.Stats object
-                readfileandsendmail()
-            }
-        });
+
+        wb2.write('over_under_standard.xlsx', res);
+        // res.render('admin_exportReport.hbs')
+
     }, (err) => {
         res.status(400).send(err)
     })
@@ -1726,6 +1781,7 @@ app.post('/save_data', (req, res) => {
                         a_productID: d.product_id,
                         a_productName: d.product_name,
                         a_productType: d.product_type,
+                        a_productSize: d.product_size,
                         a_stdlength_min: d.length_min,
                         a_stdlength_max: d.length_max,
                         a_stdweight_min: d.weight_min,

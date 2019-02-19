@@ -59,6 +59,10 @@ var AlertSchema = new Schema({
         type:String,
         required:true
     },
+    a_productSize:{
+        type:String,
+        required:true
+    },
     a_stdlength_min:{
         type:String,
         required:true
