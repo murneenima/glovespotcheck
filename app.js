@@ -33,16 +33,16 @@ var Alert = require('./AlertModel')
 // =============== Connect =========================
 
 
-// mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/gloveDB').then((doc) => {
-//     console.log('@@@@ Success to connect with Database @@@')
-// }, (err) => {
-//     console.log('!!!!!!!!!! error to connect with database !!!!!!!!!')
-// })
-mongoose.connect('mongodb://localhost:27017/Database').then((doc) => {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/gloveDB').then((doc) => {
     console.log('@@@@ Success to connect with Database @@@')
 }, (err) => {
     console.log('!!!!!!!!!! error to connect with database !!!!!!!!!')
 })
+// mongoose.connect('mongodb://localhost:27017/Database').then((doc) => {
+//     console.log('@@@@ Success to connect with Database @@@')
+// }, (err) => {
+//     console.log('!!!!!!!!!! error to connect with database !!!!!!!!!')
+// })
 
 var app = express()
 app.use(express.static('public'))
@@ -2107,9 +2107,9 @@ app.post('/save_data', (req, res) => {
 // ##############################################################################################
 
 //########################################  Port #################################################
-// app.listen(process.env.PORT || 3000, () => {
-//     console.log('listin port 3000')
-// })
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('listin port 3000')
 })
+// app.listen(3000, () => {
+//     console.log('listin port 3000')
+// })
